@@ -1,5 +1,6 @@
 # write a template for plotly-dash app for displaying a 3d surface with dimensions that can be changed by the user and a slider for changing the angle of the surface
 # import libraries
+from flask import Flask
 import dash
 from dash import dcc
 from dash import html
@@ -9,7 +10,8 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
 # create a dash app
-app = dash.Dash(external_stylesheets=[dbc.themes.COSMO])
+server = Flask(__name__)
+app = dash.Dash(external_stylesheets=[dbc.themes.COSMO], server=server)
 
 # load tensor data from file
 tensore_equazione_sigma = np.load('./tensore_equazione_sigma_book.npy')
@@ -29,7 +31,7 @@ def create_3d_surface(x, y, z):
     )
     fig.update_layout(
         autosize=False,
-        width=1100, height=800,
+        width=1000, height=800,
         margin=dict(l=65, r=50, b=65, t=90),
         uirevision='constant',
         scene = dict(
@@ -105,4 +107,4 @@ def update_figure(cecita, complessita, disistima_espressa):
 
 # run the app
 if __name__ == '__main__':
-    app.run_server(debug=True, port= 8080)
+    app.run_server(host='0.0.0.0', debug=False, port=8080)
