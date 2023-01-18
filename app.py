@@ -43,7 +43,7 @@ def create_3d_surface(x, y, z):
     # increase the font size of the axis titles
     fig.update_layout(scene=dict(xaxis_title_font_size=20, yaxis_title_font_size=20, zaxis_title_font_size=20))
     # fix the z axis range
-    fig.update_layout(scene=dict(zaxis_range=[0, 300]))
+    fig.update_layout(scene=dict(zaxis_range=[0, 320]))
     return fig
 
 # create a layout for the app with sliders for changing the z value passed to the function
